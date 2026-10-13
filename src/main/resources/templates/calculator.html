@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculatrice Spring MVC</title>
+    <!-- Tu peux lier le style.css du lab ici -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div>
+    <h1>Calculatrice Spring MVC</h1>
+
+    <!-- Gestion des erreurs -->
+    <div th:switch="${error}">
+        <p th:case="'NumberFormatError'" style="color: red; font-weight: bold;">Erreur : Veuillez entrer des nombres valides.</p>
+        <p th:case="'DivisionByZero'" style="color: red; font-weight: bold;">Erreur : Division par zéro impossible.</p>
+        <p th:case="'OperationError'" style="color: red; font-weight: bold;">Erreur : Opération invalide.</p>
+    </div>
+
+    <form th:action="@{/calculate}" method="get">
+        <table>
+            <tr>
+                <td><label for="num1">Premier nombre :</label></td>
+                <td><input id="num1" name="num1" th:value="${num1}"></td>
+            </tr>
+            <tr>
+                <td><label for="num2">Deuxième nombre :</label></td>
+                <td><input id="num2" name="num2" th:value="${num2}"></td>
+            </tr>
+            <tr>
+                <td><label>Résultat :</label></td>
+                <td><input disabled th:value="${result}"></td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <td><button type="submit" name="operation" value="add">Addition (+)</button></td>
+                <td><button type="submit" name="operation" value="subtract">Soustraction (-)</button></td>
+                <td><button type="submit" name="operation" value="multiply">Multiplication (*)</button></td>
+                <td><button type="submit" name="operation" value="divide">Division (/)</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
